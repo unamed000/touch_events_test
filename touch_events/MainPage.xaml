@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:touchEvents="clr-namespace:touch_events;assembly=touch_events"
+             xmlns:effects="clr-namespace:touch_events.Effects;assembly=touch_events"
+             x:Class="touch_events.MainPage"
+             x:DataType="touchEvents:MainPage">
+    
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <CollectionView
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                ItemsSource="{Binding ItemsSource}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView 
+                            HeightRequest="75"
+                            BackgroundColor="BlueViolet"
+                            Padding="10">
+                            <ContentView.Effects>
+                                <effects:TouchEffect 
+                                    AndroidConsumeTouchEvent="True"
+                                    TouchMove="imgBtnMarker_OnPanUpdated"
+                                    TouchHold="imgBtnMarker_TouchHold"
+                                    TouchEnd="imgBtnMarker_TouchEnd"
+                                    TouchHoldThreshold="150"/>
+                            </ContentView.Effects>
+                            <Label Text="{Binding .}"/>
+                        </ContentView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        
+            <ContentView 
+                x:Name="overlay"
+                IsVisible="False"
+                Opacity="0.3"
+                BackgroundColor="Black"
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"/>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+
+</ContentPage>
